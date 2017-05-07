@@ -1,0 +1,63 @@
+﻿Left base folder: D:\test\dll2017\dll2017\fbxsdk
+Right base folder: E:\Program Files\Autodesk\FBX\FBX SDK\2016.0\include\fbxsdk
+diff -r core\math\fbxaffinematrix.h core\math\fbxaffinematrix.h
+303,305c303,305
+< 		//typedef const double(kDouble44)[4][4] ;
+< 		////! Cast the matrix in a reference to a 4*4 array.
+< 		//inline kDouble44 & Double44() const { return *((kDouble44 *)&mData[0][0]); }
+---
+> 		typedef const double(kDouble44)[4][4] ;
+> 		//! Cast the matrix in a reference to a 4*4 array.
+> 		inline kDouble44 & Double44() const { return *((kDouble44 *)&mData[0][0]); }
+diff -r core\math\fbxmatrix.h core\math\fbxmatrix.h
+213,214c213,214
+< 		////! Define 4*4 array as a new type.
+< 		//typedef const double(kDouble44)[4][4] ;
+---
+> 		//! Define 4*4 array as a new type.
+> 		typedef const double(kDouble44)[4][4] ;
+216,217c216,217
+< 		////! Cast the matrix in a reference to a 4*4 array.
+< 		//inline kDouble44 & Double44() const { return *((kDouble44 *)&mData[0][0]); }
+---
+> 		//! Cast the matrix in a reference to a 4*4 array.
+> 		inline kDouble44 & Double44() const { return *((kDouble44 *)&mData[0][0]); }
+diff -r core\fbxlistener.h core\fbxlistener.h
+83,90c83,90
+<     //template <typename EventType,typename ListenerType> FbxEventHandler* Bind(FbxEmitter& pEmitter, void (ListenerType::*pFunc)(const EventType*)const)
+<     //{
+<     //    FbxConstMemberFuncEventHandler<EventType,ListenerType>* eventHandler = 
+<     //                FbxNew< FbxConstMemberFuncEventHandler<EventType,ListenerType> >(static_cast<ListenerType*>(this),pFunc);
+<     //    pEmitter.AddListener(*eventHandler);
+<     //    mEventHandler.PushBack(*eventHandler);
+<     //    return eventHandler;
+<     //}
+---
+>     template <typename EventType,typename ListenerType> FbxEventHandler* Bind(FbxEmitter& pEmitter, void (ListenerType::*pFunc)(const EventType*)const)
+>     {
+>         FbxConstMemberFuncEventHandler<EventType,ListenerType>* eventHandler = 
+>                     FbxNew< FbxConstMemberFuncEventHandler<EventType,ListenerType> >(static_cast<ListenerType*>(this),pFunc);
+>         pEmitter.AddListener(*eventHandler);
+>         mEventHandler.PushBack(*eventHandler);
+>         return eventHandler;
+>     }
+diff -r core\fbxpropertytypes.h core\fbxpropertytypes.h
+200c200
+< 		//unsigned const short internal_value() const;
+---
+> 		unsigned const short internal_value() const;
+diff -r scene\geometry\fbxlayer.h scene\geometry\fbxlayer.h
+118,123c118,123
+<     //const static int sTypeTextureStartIndex = int(eTextureDiffuse);	//!< The start index of texture type layer elements. 
+<     //const static int sTypeTextureEndIndex = int(eTypeCount) - 1;	//!< The end index of texture type layer elements.
+<     //const static int sTypeTextureCount = sTypeTextureEndIndex - sTypeTextureStartIndex + 1;	//!< The count of texture type layer elements.
+<     //const static int sTypeNonTextureStartIndex = int(eNormal);		//!< The start index of non-texture type layer elements.
+<     //const static int sTypeNonTextureEndIndex = int(eVisibility);	//!< The end index of non-texture type layer elements.
+<     //const static int sTypeNonTextureCount = sTypeNonTextureEndIndex - sTypeNonTextureStartIndex + 1;	//!< The count of non-texture type layer elements.
+---
+>     const static int sTypeTextureStartIndex = int(eTextureDiffuse);	//!< The start index of texture type layer elements. 
+>     const static int sTypeTextureEndIndex = int(eTypeCount) - 1;	//!< The end index of texture type layer elements.
+>     const static int sTypeTextureCount = sTypeTextureEndIndex - sTypeTextureStartIndex + 1;	//!< The count of texture type layer elements.
+>     const static int sTypeNonTextureStartIndex = int(eNormal);		//!< The start index of non-texture type layer elements.
+>     const static int sTypeNonTextureEndIndex = int(eVisibility);	//!< The end index of non-texture type layer elements.
+>     const static int sTypeNonTextureCount = sTypeNonTextureEndIndex - sTypeNonTextureStartIndex + 1;	//!< The count of non-texture type layer elements.

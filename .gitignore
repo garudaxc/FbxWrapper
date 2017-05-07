@@ -1,0 +1,10 @@
+*.opensdf
+*.sdf
+*.user
+*.suo
+*.pdb
+build/*
+bin/
+obj/
+ipch/
+!build/*.fbx
